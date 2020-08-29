@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<!-- كود مبسط جدا بدون استخدام اي مصادر خارجية وايضا سهل للقراءه والتعديل -->
+
+<!-- Very simple code no need for APIs -->
+<!-- The code is easy to read and easy to edit -->
+
+<head><meta chrerst="UTF-8">
+<title> Object360° </title>
+<link rel="icon" href="Images/360.png">
+<style>
+body{
+background: rgb(177,210,210);
+background: radial-gradient(circle, rgba(177,210,210,1) 0%, rgba(92,149,164,1) 100%);
+}
+.center {
+   text-align:center;
+  
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {color: white; opacity:0.7;font-family:Arial Narrow, sans-serif; font-variant: small-caps;}
+#footer {  
+ cursor:no-drop;font-family:monospace;  
+color:white;  
+   display: block;
+  position: fixed;
+  bottom: 0;
+ text-shadow: 1px 1px 1px #000000;
+  width: 100%;
+font-size: 15px;
+  } 
+#myImg {cursor: ew-resize; position: absolute; left:40%;}
+.button {position: relative; top:300px; height:30px; width:60px; border:none; border-radius:5px; }
+.menu {  position: absolute; left: -20px; background-color: #F0FFFF; opacity: 0.4; border-radius: 30px;width:100px; height: 220px;}
+span {text-align:center; cursor: grab;}
+
+</style>
+
+</head>
+<body class="center">
+<h1>360° Object View </h1> <br><br><br><br><br><br>
+<!-- حاول اضافة عدد كبير من الصور للجسم الواحد بحيث تغطي كافة الزوايا حتى تحصل على نتيجة افضل -->
+<!-- As much as you add images as much as you get higher quality -->
+
+<img id="myImg" height="300px" width="300px"src="Images/Planet/img0.png" onclick="changeImg()"><br>
+<input class="button" type="button" id="stopButton" onclick="stopImg()" disabled="true"  value="STOP">
+<input class="button" type="button" id="moveButton" onclick="moveImg()" value="MOVE">
+<div class="menu"><br><span onclick="planet()"><img src="Images/Planet/img0.png" height="30px" width="30px"><br> Planet </span> <hr> <span onclick="diamond()"><img src="Images/Diamond/img0.png" height="30px" width="30px"><br> Diamond </span> <hr>
+<span onclick="ballet()"><img src="Images/Ballet/img0.png" height="30px" width="30px"><br> Ballet </span>
+</div>
+
+<script>
+var myLoop;
+var index=0;
+var type ="Planet";
+var length = 35; //  اخر صورة index الطول هو 
+moveImg();
+
+function planet(){
+ type ="Planet";
+length = 35;
+document.getElementById("myImg").src= "Images/"+type+"/img0.png";
+document.getElementById("myImg").style.width= "300px";
+}
+function diamond(){
+ type ="Diamond";
+ length = 21;
+document.getElementById("myImg").src= "Images/"+type+"/img0.png";
+document.getElementById("myImg").style.width= "280px";
+}
+function ballet(){
+ type ="Ballet";
+ length = 11;
+document.getElementById("myImg").src= "Images/"+type+"/img0.png";
+document.getElementById("myImg").style.width= "250px";
+}
+function changeImg(){
+
+if(index<length){ 
+index=index+1;
+ document.getElementById("myImg").src= "Images/"+type+"/img"+index+".png";
+}
+else // في حال وصلت لاخر صورة
+{
+index=0;
+document.getElementById("myImg").src= "Images/"+type+"/img"+index+".png";
+}
+} 
+
+
+function moveImg(){
+myLoop= setInterval(function(){ changeImg(); }, 120); 
+ // ١٢٠ هي سرعة الحركة كل ماقلت كل مازادت السرعة 
+/* 120 is the speed of the movement */   
+
+document.getElementById("moveButton").disabled = true;
+document.getElementById("stopButton").disabled = false;
+}
+
+function stopImg(){
+clearInterval(myLoop);
+document.getElementById("stopButton").disabled = true;
+document.getElementById("moveButton").disabled = false;
+}
+
+</script>
+<div id="footer">&copy; Rahaf "2020"</div> 
+</body>
+</html>
